@@ -1,0 +1,6 @@
+target
+.idea
+.allure
+*.iws
+*.iml
+*.ipr
