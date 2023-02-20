@@ -6,9 +6,8 @@ public class FibonacciNumber {
 
     public Integer getFibonacciNumberByDate() {
         LocalDate date = LocalDate.now();
-        Integer num = date.getDayOfMonth();
-        Integer fibonacciNumber = getFibonacciValue(num);
-        return fibonacciNumber;
+        int num = date.getDayOfMonth()+1;
+        return getFibonacciValue(num);
     }
 
     private Integer getFibonacciValue(int n) {

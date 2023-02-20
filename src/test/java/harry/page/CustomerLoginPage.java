@@ -22,7 +22,7 @@ public class CustomerLoginPage {
     private WebElement yourNameBtr;
 
 
-    @FindBy(xpath = "//*[contains(text(), 'Login')]")
+    @FindBy(xpath = "//*[@class='btn btn-default']")
     private WebElement loginBtr;
 
     public void clickYourNameBtr() {

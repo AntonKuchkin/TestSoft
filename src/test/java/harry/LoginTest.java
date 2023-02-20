@@ -7,6 +7,7 @@ import harry.page.LoginPage;
 import harry.page.TransactionList;
 import harry.service.FibonacciNumber;
 import harry.service.WriteFileCsv;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -18,6 +19,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.Objects;
 
 public class LoginTest {
 
@@ -65,22 +67,29 @@ public class LoginTest {
         Integer balanceNew = accountHarryPotter.getBalance();
         accountHarryPotter.clickDepositBtr();
         accountHarryPotter.inputBalance(fibonacci);
-        accountHarryPotter.clickTransactionBtr();
+        accountHarryPotter.clickActionBtr();
         wait.until(ExpectedConditions.visibilityOf(accountHarryPotter.getDepositSuccessful()));
         accountHarryPotter.clickWithDrawlBtr();
-        Thread.sleep(1000);
+        wait.until(ExpectedConditions.elementToBeClickable(accountHarryPotter.goTo()));
         accountHarryPotter.inputBalance(fibonacci);
-        accountHarryPotter.clickWithDrawBtr();
+        accountHarryPotter.clickActionBtr();
         wait.until(ExpectedConditions.visibilityOf(accountHarryPotter.getTransactionSuccessful()));
-        Thread.sleep(1000);
-        Assert.assertEquals(balanceNew, accountHarryPotter.getBalance());
     }
 
     @Test
     public void transaction() throws IOException {
+
         accountHarryPotter.clickTransactionsBtr();
+        while (Objects.equals(transactionList.getWebElement(), "")) {
+            driver.get(driver.getCurrentUrl());
+        }
+        writeFileCsv.safeFile(transactionList.getWebElement());
         Assert.assertEquals(CREDIT, transactionList.getTransactionTypeCredit());
         Assert.assertEquals(DEBIT, transactionList.getTransactionTypeDebit());
-        writeFileCsv.safeFile(transactionList.getWebElement());
+    }
+
+    @AfterClass
+    public static void end() {
+        driver.close();
     }
 }

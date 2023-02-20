@@ -14,20 +14,17 @@ public class AccountHarryPotterPage {
         this.driver = driver;
     }
 
-    @FindBy(xpath = "//*[contains(text(), 'Deposit')]")
+    @FindBy(xpath = "//*[@ng-class = 'btnClass2']")
     private WebElement depositBtr;
 
     @FindBy(xpath = "//input[@type = 'number']")
     private WebElement inputBalance;
 
     @FindBy(xpath = "//*[@class='btn btn-default']")
-    private WebElement transactionBtr;
+    private WebElement actionClickBtr;
 
-    @FindBy(xpath = "//*[contains(text(), 'Withdrawl')]")
+    @FindBy(xpath = "//*[@ng-class = 'btnClass3']")
     private WebElement withDrawlBtr;
-
-    @FindBy(xpath = "//*[text() = 'Withdraw']")
-    private WebElement withdraw;
 
     @FindBy(xpath = "//*[text() = 'Deposit Successful']")
     private WebElement depositSuccessful;
@@ -35,26 +32,21 @@ public class AccountHarryPotterPage {
     @FindBy(xpath = "//*[text() = 'Transaction successful']")
     private WebElement transactionSuccessful;
 
-    @FindBy(xpath = "//*[contains(text(), 'Transactions')]")
+    @FindBy(xpath = "//*[@ng-class = 'btnClass1']")
     private WebElement transactionsBtr;
 
     @FindBy(xpath = "//div[@class = 'center']/strong[last()-1]")
     private WebElement balance;
 
+    @FindBy(xpath = "//*[@class ='form-control ng-pristine ng-untouched ng-invalid ng-invalid-required']")
+    private WebElement go;
+
+    public WebElement goTo(){
+        return go;
+    }
+
     public void clickDepositBtr() {
         depositBtr.click();
-    }
-
-    public WebElement getWithDrawBtr(){
-        return withdraw;
-    }
-
-    public WebElement getDepositBtr(){
-        return depositBtr;
-    }
-
-    public void clickWithDrawBtr(){
-        withdraw.click();
     }
 
     public WebElement getDepositSuccessful() {
@@ -65,8 +57,8 @@ public class AccountHarryPotterPage {
         return transactionSuccessful;
     }
 
-    public void clickTransactionBtr() {
-        transactionBtr.click();
+    public void clickActionBtr() {
+        actionClickBtr.click();
     }
 
     public void clickWithDrawlBtr() {
